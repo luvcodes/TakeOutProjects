@@ -13,7 +13,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -30,6 +29,7 @@ public class CommonController {
 
 
     // 形参名字必须与网页中要求的文件名保持一致
+    // 选择图片上传到服务器 (本地tomcat)
     @PostMapping("/upload")
     public R<String> upload(MultipartFile file) {
         // file是一个临时文件，需要转存到指定位置，否则本次请求完成后临时文件会删除
@@ -64,7 +64,7 @@ public class CommonController {
 
 
     /**
-     * 文件下载
+     * 文件下载, 从本地服务器下载到浏览器。也就是图片显示出来
      * @param name
      * @param response 输出流需要response来获得
      */

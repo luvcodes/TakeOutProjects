@@ -34,13 +34,13 @@ public class CategoryController {
 
     @GetMapping("/page")
     public R<Page> page(int page, int pageSize){
+
         // 分页构造器
         Page<Category> pageInfo = new Page<>(page, pageSize);
         // 条件构造器
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
         // 添加排序条件，根据sort字段进行升序排序
         queryWrapper.orderByAsc(Category::getSort);
-
         // 进行分页查询
         categoryService.page(pageInfo, queryWrapper);
 

@@ -30,7 +30,6 @@ public class DishController {
     @Autowired
     private DishFlavorService dishFlavorService;
 
-
     @Autowired
     private CategoryService categoryService;
 
@@ -46,6 +45,7 @@ public class DishController {
 
     @GetMapping("/page")
     public R<Page> page(int page, int pageSize, String name) {
+
         // 分页构造器
         Page<Dish> pageInfo = new Page<>(page, pageSize);
         Page<DishDto> dishDtoPage = new Page<>();

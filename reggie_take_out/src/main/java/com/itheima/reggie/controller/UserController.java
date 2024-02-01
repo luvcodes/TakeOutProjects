@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -99,5 +100,16 @@ public class UserController {
 
 
         return R.error("登录失败");
+    }
+
+
+    /**
+     * 移动端登出功能
+     * */
+    @PostMapping("/loginout")
+    public R<String> loginout(HttpServletRequest servletRequest) {
+        // 这里的user参数就是上面存了session的登录状态的session
+        servletRequest.getSession().removeAttribute("user");
+        return R.success("退出成功");
     }
 }
