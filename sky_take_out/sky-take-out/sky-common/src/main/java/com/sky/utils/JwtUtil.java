@@ -8,6 +8,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * @author ryanw
+ */
 public class JwtUtil {
     /**
      * 生成jwt
@@ -19,7 +22,8 @@ public class JwtUtil {
      * @return
      */
     public static String createJWT(String secretKey, long ttlMillis, Map<String, Object> claims) {
-        // 指定签名的时候使用的签名算法，也就是header那部分
+
+        // 指定签名的时候使用的签名算法，也就是header部分
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
         // 生成JWT的时间
@@ -39,7 +43,7 @@ public class JwtUtil {
     }
 
     /**
-     * Token解密
+     * JWT Token解密
      *
      * @param secretKey jwt秘钥 此秘钥一定要保留好在服务端, 不能暴露出去, 否则sign就可以被伪造, 如果对接多个客户端建议改造成多个
      * @param token     加密后的token
@@ -48,10 +52,11 @@ public class JwtUtil {
     public static Claims parseJWT(String secretKey, String token) {
         // 得到DefaultJwtParser
         Claims claims = Jwts.parser()
-                // 设置签名的秘钥
+                // 设置签名的秘钥, 这就是上面的secretKey，对应createJWT方法
                 .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
                 // 设置需要解析的jwt
-                .parseClaimsJws(token).getBody();
+                .parseClaimsJws(token)
+                .getBody();
         return claims;
     }
 

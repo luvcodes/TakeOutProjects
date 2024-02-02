@@ -20,6 +20,7 @@ import java.util.Map;
 
 /**
  * 员工管理
+ * @author ryanw
  */
 @RestController
 @RequestMapping("/admin/employee")
@@ -28,12 +29,12 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
     @Autowired
     private JwtProperties jwtProperties;
 
     /**
      * 登录
-     *
      * @param employeeLoginDTO
      * @return
      */
@@ -46,11 +47,13 @@ public class EmployeeController {
         //登录成功后，生成jwt令牌
         Map<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.EMP_ID, employee.getId());
+
         String token = JwtUtil.createJWT(
                 jwtProperties.getAdminSecretKey(),
                 jwtProperties.getAdminTtl(),
                 claims);
 
+        // builder方法就是设计模式中的建造者模式，EmployeeLoginVO中有Builder注解
         EmployeeLoginVO employeeLoginVO = EmployeeLoginVO.builder()
                 .id(employee.getId())
                 .userName(employee.getUsername())
@@ -68,6 +71,8 @@ public class EmployeeController {
      */
     @PostMapping("/logout")
     public Result<String> logout() {
+        // TODO 登出功能完善
+
         return Result.success();
     }
 
