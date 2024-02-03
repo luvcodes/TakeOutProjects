@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author ryanw
+ */
 @Data
 public class EmployeePageQueryDTO implements Serializable {
 
