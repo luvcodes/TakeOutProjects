@@ -119,4 +119,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+    /**
+     * 启用禁用员工账号
+     * */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // 常规写法
+        /*Employee employee = new Employee();
+        employee.setStatus(status);
+        employee.setId(id);*/
+
+        // 使用builder注解的写法
+        Employee employee = Employee.builder().status(status).id(id).build();
+
+        employeeMapper.update(employee);
+    }
+
 }
