@@ -30,6 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public Employee login(EmployeeLoginDTO employeeLoginDTO) {
+        // 这两个存储的都是前端传过来的参数
         String username = employeeLoginDTO.getUsername();
         String password = employeeLoginDTO.getPassword();
 
@@ -38,20 +39,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         // 2、处理各种异常情况（用户名不存在、密码不对、账号被锁定）
         if (employee == null) {
-            //账号不存在
+            // 2.1 账号不存在
             throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
         }
 
-        // 密码比对
-        // TODO 后期需要进行md5加密，然后再进行比对
+        // 2.2 密码比对
+        // 对前端传过来的密码进行md5加密处理
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!password.equals(employee.getPassword())) {
-            //密码错误
+            // 密码错误
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
         }
 
-        // 账号状态不是1，也就是disable状态
+        // 2.3 账号状态不是1，也就是disable状态
         if (employee.getStatus().equals(StatusConstant.DISABLE)) {
-            //账号被锁定
+            // 账号被锁定
             throw new AccountLockedException(MessageConstant.ACCOUNT_LOCKED);
         }
 
