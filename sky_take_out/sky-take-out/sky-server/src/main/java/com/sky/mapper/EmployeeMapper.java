@@ -35,7 +35,14 @@ public interface EmployeeMapper {
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
-     * 启用禁用员工账号
+     * 启用禁用员工账号而写的，但是这里可以看EmployeeMapper.xml文件中的update动态SQL
+     * 所以这个方法也可以用来使用修改员工信息
      * */
     void update(Employee employee);
+
+    /**
+     * 修改员工信息功能用，这个方法主要是为了在修改界面数据回显
+     * */
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Long id);
 }

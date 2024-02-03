@@ -33,4 +33,14 @@ public interface EmployeeService {
      * @param id
      */
     void startOrStop(Integer status, Long id);
+
+    /**
+     * 根据员工id查询信息，是为了在修改界面数据回显
+     * */
+    Employee getById(Long id);
+
+    /**
+     * 根据员工id更新员工信息，与上面的getById一起使用
+     * */
+    void update(EmployeeDTO employeeDTO);
 }
