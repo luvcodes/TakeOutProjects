@@ -2,9 +2,9 @@ package com.sky.enumeration;
 
 /**
  * 数据库操作类型
+ * @author ryanw
  */
 public enum OperationType {
-
     /**
      * 更新操作
      */
