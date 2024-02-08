@@ -42,6 +42,10 @@ public interface DishMapper {
     // 根据菜品id集合批量删除菜品
     void deleteByIds(List<Long> ids);
 
+    // 写动态SQL，执行更新操作的时候看Dish里面是不是null，如果不是null再执行修改操作
+    // 根据id来动态修改菜品
+    @Autofill(value = OperationType.UPDATE)
+    void update(Dish dish);
 
-    //
+
 }
