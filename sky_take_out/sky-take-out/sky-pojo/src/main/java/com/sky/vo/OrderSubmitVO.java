@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * @author ryanw
+ */
 @Data
 @Builder
 @NoArgsConstructor

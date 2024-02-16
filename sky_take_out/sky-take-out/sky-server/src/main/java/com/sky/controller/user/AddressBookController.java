@@ -23,8 +23,6 @@ public class AddressBookController {
 
     /**
      * 查询当前登录用户的所有地址信息
-     *
-     * @return
      */
     @GetMapping("/list")
     @ApiOperation("查询当前登录用户的所有地址信息")
@@ -37,9 +35,6 @@ public class AddressBookController {
 
     /**
      * 新增地址
-     *
-     * @param addressBook
-     * @return
      */
     @PostMapping
     @ApiOperation("新增地址")
@@ -48,6 +43,9 @@ public class AddressBookController {
         return Result.success();
     }
 
+    /**
+     * 根据id查询地址
+     * */
     @GetMapping("/{id}")
     @ApiOperation("根据id查询地址")
     public Result<AddressBook> getById(@PathVariable Long id) {
@@ -57,9 +55,6 @@ public class AddressBookController {
 
     /**
      * 根据id修改地址
-     *
-     * @param addressBook
-     * @return
      */
     @PutMapping
     @ApiOperation("根据id修改地址")
@@ -70,9 +65,6 @@ public class AddressBookController {
 
     /**
      * 设置默认地址
-     *
-     * @param addressBook
-     * @return
      */
     @PutMapping("/default")
     @ApiOperation("设置默认地址")
@@ -83,9 +75,6 @@ public class AddressBookController {
 
     /**
      * 根据id删除地址
-     *
-     * @param id
-     * @return
      */
     @DeleteMapping
     @ApiOperation("根据id删除地址")
@@ -106,6 +95,9 @@ public class AddressBookController {
         addressBook.setUserId(BaseContext.getCurrentId());
         List<AddressBook> list = addressBookService.list(addressBook);
 
+        // 这个方法要和设置默认地址方法一起看
+        // get(0)能成功是因为在setDefault方法中，先处理了一步，就是把当前用户的所有地址都设置成0，然后设置默认地址为1
+        // 所以这里取第一个位置的默认地址，其实也就只有一个默认地址。
         if (list != null && list.size() == 1) {
             return Result.success(list.get(0));
         }
