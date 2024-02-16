@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * 封装分页查询结果
+ * @author ryanw
  */
 @Data
 @AllArgsConstructor
