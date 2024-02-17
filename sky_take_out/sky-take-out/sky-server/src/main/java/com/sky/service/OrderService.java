@@ -36,4 +36,9 @@ public interface OrderService {
      * 查询订单详情
      */
     OrderVO details(Long id);
+
+    /**
+     * 用户取消订单
+     */
+    void userCancelById(Long id) throws Exception;
 }

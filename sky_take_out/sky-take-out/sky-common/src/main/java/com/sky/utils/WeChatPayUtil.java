@@ -31,6 +31,7 @@ import java.util.List;
 
 /**
  * 微信支付工具类
+ * @author ryanw
  */
 @Component
 public class WeChatPayUtil {
@@ -46,8 +47,6 @@ public class WeChatPayUtil {
 
     /**
      * 获取调用微信接口的客户端工具对象
-     *
-     * @return
      */
     private CloseableHttpClient getClient() {
         PrivateKey merchantPrivateKey = null;
@@ -74,10 +73,6 @@ public class WeChatPayUtil {
 
     /**
      * 发送post方式请求
-     *
-     * @param url
-     * @param body
-     * @return
      */
     private String post(String url, String body) throws Exception {
         CloseableHttpClient httpClient = getClient();
@@ -100,9 +95,6 @@ public class WeChatPayUtil {
 
     /**
      * 发送get方式请求
-     *
-     * @param url
-     * @return
      */
     private String get(String url) throws Exception {
         CloseableHttpClient httpClient = getClient();
@@ -129,7 +121,6 @@ public class WeChatPayUtil {
      * @param total       总金额
      * @param description 商品描述
      * @param openid      微信用户的openid
-     * @return
      */
     private String jsapi(String orderNum, BigDecimal total, String description, String openid) throws Exception {
         JSONObject jsonObject = new JSONObject();
@@ -161,7 +152,6 @@ public class WeChatPayUtil {
      * @param total       金额，单位 元
      * @param description 商品描述
      * @param openid      微信用户的openid
-     * @return
      */
     public JSONObject pay(String orderNum, BigDecimal total, String description, String openid) throws Exception {
         //统一下单，生成预支付交易单
@@ -212,7 +202,6 @@ public class WeChatPayUtil {
      * @param outRefundNo   商户退款单号
      * @param refund        退款金额
      * @param total         原订单金额
-     * @return
      */
     public String refund(String outTradeNo, String outRefundNo, BigDecimal refund, BigDecimal total) throws Exception {
         JSONObject jsonObject = new JSONObject();
