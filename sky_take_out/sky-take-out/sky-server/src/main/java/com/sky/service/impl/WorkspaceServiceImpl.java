@@ -19,6 +19,9 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author ryanw
+ */
 @Service
 @Slf4j
 public class WorkspaceServiceImpl implements WorkspaceService {
@@ -34,9 +37,6 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     /**
      * 根据时间段统计营业数据
-     * @param begin
-     * @param end
-     * @return
      */
     public BusinessDataVO getBusinessData(LocalDateTime begin, LocalDateTime end) {
         /**
@@ -87,8 +87,6 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     /**
      * 查询订单管理数据
-     *
-     * @return
      */
     public OrderOverViewVO getOrderOverView() {
         Map map = new HashMap();
@@ -125,8 +123,6 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     /**
      * 查询菜品总览
-     *
-     * @return
      */
     public DishOverViewVO getDishOverView() {
         Map map = new HashMap();
@@ -144,8 +140,6 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     /**
      * 查询套餐总览
-     *
-     * @return
      */
     public SetmealOverViewVO getSetmealOverView() {
         Map map = new HashMap();
