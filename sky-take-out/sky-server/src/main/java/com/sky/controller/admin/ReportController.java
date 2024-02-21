@@ -19,65 +19,80 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 /**
- * 报表
- * @author ryanw
+ * 数据统计相关接口
  */
-@Slf4j
 @RestController
 @RequestMapping("/admin/report")
-@Api(tags = "统计报表相关接口")
+@Api(tags = "数据统计相关接口")
+@Slf4j
 public class ReportController {
+
     @Autowired
-    public ReportService reportService;
-
-    @GetMapping("/turnoverStatistics")
-    @ApiOperation("营业额数据统计")
-    public Result<TurnoverReportVO> turnoverStatistics(
-            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
-            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
-            ) {
-        return Result.success(reportService.getTurnover(begin, end));
-    }
+    private ReportService reportService;
 
     /**
-     * 用户数据统计
+     * 营业额统计
+     * @param begin
+     * @param end
+     * @return
      */
-    @GetMapping("userStatistics")
-    @ApiOperation("用户数据统计")
-    public Result<UserReportVO> userStatistics(
-            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
-            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
-    ) {
-        return Result.success(reportService.getUserStatistics(begin, end));
+    @GetMapping("/turnoverStatistics")
+    @ApiOperation("营业额统计")
+    public Result<TurnoverReportVO> turnoverStatistics(
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("营业额数据统计：{},{}",begin,end);
+        return Result.success(reportService.getTurnoverStatistics(begin,end));
     }
 
     /**
-     * 订单数据统计
+     * 用户统计
+     * @param begin
+     * @param end
+     * @return
+     */
+    @GetMapping("/userStatistics")
+    @ApiOperation("用户统计")
+    public Result<UserReportVO> userStatistics(
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("用户数据统计：{},{}",begin,end);
+        return Result.success(reportService.getUserStatistics(begin,end));
+    }
+
+    /**
+     * 订单统计
+     * @param begin
+     * @param end
+     * @return
      */
     @GetMapping("/ordersStatistics")
-    @ApiOperation("用户数据统计")
-    public Result<OrderReportVO> orderStatistics(
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
-            LocalDate begin,
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
-            LocalDate end){
-
+    @ApiOperation("订单统计")
+    public Result<OrderReportVO> ordersStatistics(
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("订单数据统计：{},{}",begin,end);
         return Result.success(reportService.getOrderStatistics(begin,end));
     }
 
     /**
-     * 销量排名统计
+     * 销量排名top10
+     * @param begin
+     * @param end
+     * @return
      */
     @GetMapping("/top10")
-    @ApiOperation("销量排名统计")
+    @ApiOperation("销量排名top10")
     public Result<SalesTop10ReportVO> top10(
-            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("销量排名top10：{},{}",begin,end);
         return Result.success(reportService.getSalesTop10(begin,end));
     }
 
     /**
      * 导出运营数据报表
+     * @param response
      */
     @GetMapping("/export")
     @ApiOperation("导出运营数据报表")
